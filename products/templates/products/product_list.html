@@ -1,0 +1,41 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block content %}
+<div class="product-container">
+    {% for product in object_list %}
+        <div class="product-display">
+            <div class="slideshow">
+                {% for prd_img in product.images.all %}
+                    <img class="slide" src="{{ prd_img.image.url }}"/>
+                {% empty %}
+                    <img class="slide" src="{% static 'core/img/product-image-placeholder.png' %}"/>
+                {% endfor %}
+            </div>
+            <div class="product-content">
+                <h5>{{ product.title }}</h5>
+                <p>{{ product.description }}</p>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+<script type="text/javascript">
+    let slideshows = document.querySelectorAll(".slideshow")
+    slideshows.forEach((slideshow)=>{
+        let sidx=0
+        let slides=slideshow.querySelectorAll(".slide")
+        let slideMe = ()=>{
+            console.log('Slide me ...', sidx)
+            slides.forEach((slide)=>{
+                slide.style.display="none"
+            })
+            sidx++;
+            if (sidx > slides.length) {sidx = 1}
+            slides[sidx-1].style.display = "block";
+            setTimeout(slideMe, 2000)
+        }
+        slideMe()
+    })
+
+</script>
+{% endblock %}

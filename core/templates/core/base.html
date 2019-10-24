@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Shopping</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'core/css/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'core/fa/css/all.min.css' %}"/>
+</head>
+<body>
+    <div class="container">
+        <header id="main-header">
+            <a class="brand" href="#">
+                <img src="{% static 'core/img/logo.png' %}"/>
+            </a>
+            <ul>
+                <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="#about"><i class="fas fa-shopping-cart" id="cart-icon"><span>4</span></i> Cart</a></li>
+                <li><a href="#login"><i class="fas fa-user"></i> Login</a></li>
+            </ul>
+        </header>
+        <main id="main-content">
+            {% block content %}{% endblock%}
+        </main>
+        <footer id="main-footer"></footer>
+    </div>
+</body>
+</html>
