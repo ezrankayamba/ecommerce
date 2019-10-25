@@ -23,6 +23,6 @@ def resize_image(sender, instance, created, raw, using, **kwargs):
             print(f'Image file: {instance.image.path}')
             image = Image.open(os.path.join(
                 settings.MEDIA_ROOT, instance.image.name))
-            image = image.resize((750, 400), Image.ANTIALIAS)
-            image.save(instance.image.path, image.format, quality=90)
-            print(f'Successfully resized image at: {instance.image.path}')
+            image = image.resize((700, 400), Image.ANTIALIAS)
+            image.save(instance.image.path, image.format, quality=100)
+            print(f'Successfully resized 700 X 400 image at: {instance.image.path}')
