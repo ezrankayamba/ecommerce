@@ -1,0 +1,35 @@
+{% load static %}
+<header id="main-header" class="sticky-top">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light static-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <img src="{% static 'core/img/logo.png' %}" />
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a href="{% url 'products-home' %}" class="nav-link"><i class="fas fa-home"></i> Home</a>
+          </li>
+          <li class="nav-item">
+            <a href="#about" class="nav-link"><i class="fas fa-shopping-cart" id="cart-icon"><span>4</span></i>Cart</a>
+          </li>
+          {% if user.is_authenticated %}
+            <li class="nav-item">
+                  <a href="{% url 'users-profile' %}" class="nav-link"><i class="fas fa-user"></i> {{ user }}</a>
+              </li>
+              <li class="nav-item">
+                  <a href="{% url 'users-logout' %}" class="nav-link"><i class="fas fa-sign-out-alt"></i> Logout</a>
+              </li>
+           {% else %}
+             <li class="nav-item">
+                <a href="{% url 'users-login' %}" class="nav-link"><i class="fas fa-user"></i> Login</a>
+            </li>
+           {% endif %}
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>

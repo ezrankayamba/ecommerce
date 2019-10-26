@@ -1,0 +1,20 @@
+{% extends 'core/base.html' %}
+{% load socialaccount %}
+{%  providers_media_js %}
+{% block content %}
+    <div class="container">
+        <h4>Login</h4>
+        <div class="row">
+            <div class="col-md-4">
+                <ul class="list-group">
+                  <li class="list-group-item d-flex justify-content-between align-items-center pt-0 pb-0">
+                    <a role="button" class="btn btn-lg" href="{% provider_login_url 'facebook' method='oauth2' %}"><i class="fab fa-facebook-square"></i> Facebook Connect</a>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center pt-0 pb-0">
+                    <a role="button" class="btn btn-lg" href="{% provider_login_url 'google' %}"><i class="fab fa-google-plus-square"></i> Google Connect</a>
+                  </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}

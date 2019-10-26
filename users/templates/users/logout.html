@@ -1,0 +1,17 @@
+{% extends 'core/base.html' %}
+{% load socialaccount %}
+{%  providers_media_js %}
+{% block content %}
+    <div class="container">
+        <h4>Logout ...</h4>
+        <div class="row">
+            <div class="col-md-4">
+               <p>Are you sure you want to logout?</p>
+               <form action="{% url 'account_logout' %}" method="POST">
+                 {% csrf_token %}
+                 <button class="btn btn-warning">Yes, Logout</button>
+               </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
