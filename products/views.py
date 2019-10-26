@@ -4,4 +4,4 @@ from . import models
 
 
 class ProductsHomeView(ListView):
-    model = models.Product
+    model = models.ProductImage

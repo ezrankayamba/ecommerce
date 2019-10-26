@@ -1,28 +1,93 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>My Shopping</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="{% static 'core/css/main.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'core/fa/css/all.min.css' %}"/>
-</head>
-<body>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'core/bs4/css/bootstrap.min.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'core/css/main.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'core/fa/css/all.min.css' %}"
+    />
+  </head>
+  <body>
     <div class="container">
-        <header id="main-header">
-            <a class="brand" href="#">
-                <img src="{% static 'core/img/logo.png' %}"/>
+      <header id="main-header">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light static-top">
+          <div class="container">
+            <a class="navbar-brand" href="#">
+              <img src="{% static 'core/img/logo.png' %}" />
             </a>
-            <ul>
-                <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
-                <li><a href="#about"><i class="fas fa-shopping-cart" id="cart-icon"><span>4</span></i> Cart</a></li>
-                <li><a href="#login"><i class="fas fa-user"></i> Login</a></li>
-            </ul>
-        </header>
-        <main id="main-content">
-            {% block content %}{% endblock%}
-        </main>
-        <footer id="main-footer"></footer>
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target="#navbarResponsive"
+              aria-controls="navbarResponsive"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                  <a href="#" class="nav-link"
+                    ><i class="fas fa-home"></i> Home</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a href="#about" class="nav-link"
+                    ><i class="fas fa-shopping-cart" id="cart-icon"
+                      ><span>4</span></i
+                    >
+                    Cart</a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a href="#login" class="nav-link"
+                    ><i class="fas fa-user"></i> Login</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </header>
+      <main id="main-content">
+        {% block content %}{% endblock%}
+      </main>
+      <footer id="main-footer">
+        <article>
+          <h5>About Us</h5>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          </p>
+        </article>
+        <article>
+          <h5>Contact Us</h5>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          </p>
+        </article>
+      </footer>
     </div>
-</body>
+    <script src="{% static 'core/bs4/js/jquery-3.3.1.slim.min.js' %}"></script>
+    <script src="{% static 'core/bs4/js/popper.min.js' %}"></script>
+    <script src="{% static 'core/bs4/js/bootstrap.min.js' %}"></script>
+  </body>
 </html>
