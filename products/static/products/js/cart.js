@@ -50,7 +50,7 @@ class ProductCart extends React.Component {
                     this.setState({ cart: count })
                     mainCart.addToCart({ id: this.state.id, count: count })
                 },
-                className: 'btn',
+                className: 'btn pt-0 pb-0',
                 role: 'button'
             },
             e('i', {
