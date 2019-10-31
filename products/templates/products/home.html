@@ -34,7 +34,7 @@
         <div class="side-product-list">
             {% for product in top_products %}
             <div class="wrap">
-                <h6>Product 1</h6>
+                <h6>{{ product.title }}</h6>
                 <div class="product row">
                     <div class="col-md-4">
                         {% if product.images.first %}
