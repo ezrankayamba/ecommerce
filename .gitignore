@@ -38,7 +38,7 @@ env/
 build/
 develop-eggs/
 dist/
-static/
+# static/
 downloads/
 eggs/
 lib/
