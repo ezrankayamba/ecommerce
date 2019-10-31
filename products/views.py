@@ -12,4 +12,5 @@ class ProductsHomeView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['product_images'] = models.ProductImage.objects.all()
+        context['top_products'] = models.Product.objects.all()[:2]
         return context

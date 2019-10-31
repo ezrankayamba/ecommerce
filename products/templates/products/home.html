@@ -1,4 +1,7 @@
-{% extends 'core/base.html' %} {% load static %} {% block content %}
+{% extends 'core/base.html' %}
+{% load humanize %}
+{% load static %}
+{% block content %}
 <div id="main-section" class="row pl-3">
     <div id="carousel-products" class="carousel slide col-md-8" data-ride="carousel">
         <ol class="carousel-indicators">
@@ -29,8 +32,8 @@
     <div id="topproducts" class="col-md-4">
         <h5 class="title bg-light p-1">Top products</h5>
         <div class="side-product-list">
-            {% for product in products %}
-            {% if forloop.counter < 3 %} <div class="wrap">
+            {% for product in top_products %}
+            <div class="wrap">
                 <h6>Product 1</h6>
                 <div class="product row">
                     <div class="col-md-4">
@@ -41,16 +44,14 @@
                         {% endif %}
                     </div>
                     <div class="col-md-8">
-                        <p class="price mb-0">$9.99 <br /><a href="#" role="button" class="btn"><i class="fas fa-cart-plus"></i></a></p>
+                        <p class="price mb-0">$ {{ product.price|floatformat:2|intcomma }} <br /><a href="#" role="button" class="btn p-0"><i class="fas fa-cart-plus"></i></a></p>
                     </div>
                 </div>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                    tempor </p>
+                <p>{{ product.description }}</p>
+            </div>
+            {% endfor %}
         </div>
-        {% endif %}
-        {% endfor %}
     </div>
-</div>
 </div>
 <div class="product-container">
     {% for product in products %}
@@ -63,8 +64,9 @@
             {% endif %}
         </div>
         <div class="product-content">
-            <h5>{{ product.title }} <a href="#" role="button" class="btn float-right"><i class="fas fa-cart-plus"></i></a></h5>
+            <h5>{{ product.title }}</h5>
             <p>{{ product.description }}</p>
+            <p> $ {{ product.price|floatformat:2|intcomma }} <a href="#" role="button" class="btn float-right p-0"><i class="fas fa-cart-plus"></i></a></p>
         </div>
     </div>
     {% endfor %}
