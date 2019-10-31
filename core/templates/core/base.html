@@ -18,7 +18,9 @@
         <!-- <p>{{ user }}</p> -->
         {% block content %}{% endblock%}
     </main>
+    {% block footer %}
     <!-- {% include 'core/main-footer.html' %} -->
+    {% endblock %}
     <script src="{% static 'core/bs4/js/jquery-3.3.1.slim.min.js' %}"></script>
     <script src="{% static 'core/bs4/js/popper.min.js' %}"></script>
     <script src="{% static 'core/bs4/js/bootstrap.min.js' %}"></script>
