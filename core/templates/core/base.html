@@ -1,22 +1,27 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
-  <head>
+
+<head>
     <title>My Shopping</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="{% static 'core/bs4/css/bootstrap.min.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'core/css/main.css' %}" />
     <link rel="stylesheet" type="text/css" href="{% static 'core/fa/css/all.min.css' %}" />
-  </head>
-  <body>
+    {% block extra_css %}
+    {% endblock %}
+</head>
+
+<body>
     {% include 'core/main-navbar.html' %}
     <main id="main-content" class="container">
-      <!-- <p>{{ user }}</p> -->
-      {% block content %}{% endblock%}
+        <!-- <p>{{ user }}</p> -->
+        {% block content %}{% endblock%}
     </main>
     <!-- {% include 'core/main-footer.html' %} -->
     <script src="{% static 'core/bs4/js/jquery-3.3.1.slim.min.js' %}"></script>
     <script src="{% static 'core/bs4/js/popper.min.js' %}"></script>
     <script src="{% static 'core/bs4/js/bootstrap.min.js' %}"></script>
-  </body>
+</body>
+
 </html>

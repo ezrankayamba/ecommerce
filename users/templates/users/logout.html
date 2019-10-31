@@ -1,17 +1,23 @@
 {% extends 'core/base.html' %}
+{% load static %}
 {% load socialaccount %}
-{%  providers_media_js %}
+{% providers_media_js %}
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'core/css/users.css' %}">
+{% endblock %}
 {% block content %}
-    <div class="container">
+<div class="container" id="logout-form">
+    <div class="wrap">
         <h4>Logout ...</h4>
         <div class="row">
             <div class="col-md-4">
-               <p>Are you sure you want to logout?</p>
-               <form action="{% url 'account_logout' %}" method="POST">
-                 {% csrf_token %}
-                 <button class="btn btn-warning">Yes, Logout</button>
-               </form>
+                <p>Are you sure you want to logout?</p>
+                <form action="{% url 'account_logout' %}" method="POST">
+                    {% csrf_token %}
+                    <button class="btn btn-outline-secondary">Yes, Logout</button>
+                </form>
             </div>
         </div>
     </div>
+</div>
 {% endblock %}

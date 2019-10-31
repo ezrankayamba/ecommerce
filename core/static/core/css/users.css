@@ -1,0 +1,31 @@
+#login-form,
+#register-form,
+#profile-form,
+#logout-form {
+    background: #f9f9f9;
+    padding-bottom: 1rem;
+}
+
+#login-form .wrap,
+#register-form .wrap,
+#profile-form .wrap {
+    width: 40%;
+    /*margin: 0 auto;*/
+    padding-left: 1rem;
+}
+
+#profile-form .wrap .media {
+    padding-top: 1rem;
+}
+
+.account-img {
+    height: 96px;
+    width: 96px;
+    margin-right: 20px;
+    margin-bottom: 16px;
+    border: 1px solid #333;
+}
+
+.account-heading {
+    font-size: 2.5rem;
+}

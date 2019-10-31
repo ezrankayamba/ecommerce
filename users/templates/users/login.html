@@ -1,20 +1,32 @@
 {% extends 'core/base.html' %}
+{% load static %}
 {% load socialaccount %}
-{%  providers_media_js %}
+{% providers_media_js %}
+{% load crispy_forms_tags %}
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'core/css/users.css' %}">
+{% endblock %}
 {% block content %}
-    <div class="container">
-        <h4>Login</h4>
-        <div class="row">
-            <div class="col-md-4">
-                <ul class="list-group">
-                  <li class="list-group-item d-flex justify-content-between align-items-center pt-0 pb-0">
-                    <a role="button" class="btn btn-lg" href="{% provider_login_url 'facebook' method='oauth2' %}"><i class="fab fa-facebook-square"></i> Facebook Connect</a>
-                  </li>
-                  <li class="list-group-item d-flex justify-content-between align-items-center pt-0 pb-0">
-                    <a role="button" class="btn btn-lg" href="{% provider_login_url 'google' %}"><i class="fab fa-google-plus-square"></i> Google Connect</a>
-                  </li>
-                </ul>
+<div class="content-section" id="login-form">
+    <div class="wrap">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="borde-botton mb-4">Log In</legend>
+                {{ form|crispy }}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-info" type="submmit">Log In</button>
             </div>
+        </form>
+        <p>Login via social media</p>
+        <div>
+            <a role="button" class="btn btn-outline-info" href="{% provider_login_url 'facebook' method='oauth2' %}"><i class="fab fa-facebook-square"></i> Facebook Connect</a>
+            <a role="button" class="btn btn-outline-info" href="{% provider_login_url 'google' %}"><i class="fab fa-google-plus-square"></i> Google Connect</a>
+        </div>
+        <div class="border-top pt-2 mt-4 pb-4">
+            <small class="text-muted">Need an account? <a href="{% url 'register' %}" class="ml-2">Sign Up</a></small>
         </div>
     </div>
-{% endblock %}
+</div>
+{% endblock content%}

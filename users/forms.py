@@ -25,3 +25,12 @@ class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['image']
+
+
+class PasswordChangeForm(forms.Form):
+    new_password = forms.CharField(
+        label="Enter your new password",
+        widget=forms.PasswordInput,
+        validators=[RegexValidator(
+            r'^[a-zA-Z]{1}[a-zA-Z0-9]{5,9}$', message="Valid password start with letter, length between 6 and 10 characters")]
+    )
