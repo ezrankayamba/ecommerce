@@ -16,7 +16,15 @@
 <body>
     {% include 'core/main-navbar.html' %}
     <main id="main-content" class="pt-2">
-        <!-- <p>{{ user }}</p> -->
+        {% if messages %}
+        <div class="container p-0" id="flash-messages">
+            <ul class="messages border">
+                {% for message in messages %}
+                <li {% if message.tags %} class="text-{{ message.tags }} p-2" {% endif %}>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
         {% block content %}{% endblock%}
     </main>
     {% block footer %}

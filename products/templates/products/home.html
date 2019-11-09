@@ -45,7 +45,11 @@
                             {% endif %}
                         </div>
                         <div class="col-md-7">
-                            <p class="price">$ {{ product.price|floatformat:2|intcomma }} <br /><span class="cart-btn-wrap" data-id="{{ product.id }}"><a href="#" role="button" class="btn p-0"><i class="fas fa-cart-plus"></i></a></span></p>
+                            $ {{ product.price|floatformat:2|intcomma }} <br />
+                            <div class="btn-group pt-1" role="group">
+                                <a href="{% url 'add-to-cart' product.id %}" role="button" class="btn btn-sm btn-outline-secondary"><i class="fas fa-cart-plus"></i> Cart</a>
+                                <a href="{% url 'add-and-buy-now' product.id %}" role="button" class="btn btn-sm btn-secondary text-primary">Buy Now</a>
+                            </div>
                         </div>
                     </div>
                     <p class="mb-1">{{ product.description }}</p>
@@ -58,21 +62,24 @@
 <div class="container bg-light">
     <div class="product-container small pt-3 pb-3">
         {% for product in products %}
-        <div class="product-display">
+        <div class="product-display card">
             <div class="slideshow">
                 {% if product.images.first %}
-                <img class="slide" src="{{ product.images.first.image.url }}" />
+                <img class="card-img-top" src="{{ product.images.first.image.url }}" />
                 {% else %}
-                <img class="slide" src="{% static 'core/img/product-image-placeholder.png' %}" />
+                <img class="card-img-top" src="{% static 'core/img/product-image-placeholder.png' %}" />
                 {% endif %}
             </div>
-            <div class="product-content">
+            <div class="product-content2 card-body">
                 <h6>{{ product.title }}</h6>
-                <p>{{ product.description }}</p>
-                <p>
-                    $ {{ product.price|floatformat:2|intcomma }}
-                    <span class="cart-btn-wrap float-right" data-id="{{ product.id }}"></span>
-                </p>
+                <p class="card-text">{{ product.description }}</p>
+            </div>
+            <div class="card-footer">
+                <span>$ 10.00</span>
+                <div class="btn-group pl-2 float-right" role="group">
+                    <a href="{% url 'add-to-cart' product.id %}" role="button" class="btn btn-sm btn-outline-secondary"><i class="fas fa-cart-plus"></i> Cart</a>
+                    <a href="{% url 'add-and-buy-now' product.id %}" role="button" class="btn btn-sm btn-secondary text-primary">Buy Now</a>
+                </div>
             </div>
         </div>
         {% endfor %}
@@ -91,5 +98,5 @@
 {% block extra_js %}
 <script src="{% static 'core/reactjs/react.production.min.js' %}"></script>
 <script src="{% static 'core/reactjs/react-dom.production.min.js' %}"></script>
-<script type="text/javascript" src="{% static 'products/js/cart.js' %}"></script>
+<!-- <script type="text/javascript" src="{% static 'products/js/cart.js' %}"></script> -->
 {% endblock %}

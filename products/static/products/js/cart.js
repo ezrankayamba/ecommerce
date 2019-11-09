@@ -40,10 +40,12 @@ class ProductCart extends React.Component {
         super(props);
         this.state = { id: props.id, cart: 0 };
     }
-    // <div class="btn-group" role="group" aria-label="BuyOrCart">
-    //                             <a role="button" href="#" class="btn btn-sm btn-outline-secondary"><i class="fas fa-cart-plus"></i> Cart</a>
-    //                             <a role="button" href="#" class="btn btn-sm btn-secondary">Buy Now</a>
-    //                         </div>
+    toCart() {
+        let count = this.state.cart + 1
+        console.log('Cart: ', this.state.id, ' - ', count)
+        this.setState({ cart: count })
+        mainCart.addToCart({ id: this.state.id, count: count })
+    }
     render() {
         let rnd = e(
             'div', {
@@ -54,10 +56,7 @@ class ProductCart extends React.Component {
                 e(
                     'a', {
                         onClick: () => {
-                            let count = this.state.cart + 1
-                            console.log('Cart: ', this.state.id, ' - ', count)
-                            this.setState({ cart: count })
-                            mainCart.addToCart({ id: this.state.id, count: count })
+                            this.toCart()
                         },
                         role: 'button',
                         className: 'btn btn-sm btn-outline-secondary'
@@ -71,10 +70,7 @@ class ProductCart extends React.Component {
                 e(
                     'a', {
                         onClick: () => {
-                            let count = this.state.cart + 1;
-                            console.log('Cart: ', this.state.id, ' - ', count);
-                            this.setState({ cart: count });
-                            mainCart.addToCart({ id: this.state.id, count: count });
+                            this.toCart()
                             console.log('Buy Now');
                         },
                         role: 'button',
@@ -83,21 +79,6 @@ class ProductCart extends React.Component {
                 )
             ]
         )
-        // return e(
-        //     'a', {
-        //         onClick: () => {
-        //             let count = this.state.cart + 1
-        //             console.log('Cart: ', this.state.id, ' - ', count)
-        //             this.setState({ cart: count })
-        //             mainCart.addToCart({ id: this.state.id, count: count })
-        //         },
-        //         className: 'btn pt-0 pb-0',
-        //         role: 'button'
-        //     },
-        //     e('i', {
-        //         className: 'fas fa-cart-plus'
-        //     })
-        // );
         return rnd;
     }
 }

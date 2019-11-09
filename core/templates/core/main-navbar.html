@@ -14,7 +14,16 @@
                         <a href="{% url 'products-home' %}" class="nav-link"><i class="fas fa-home"></i> Home</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#about" class="nav-link"><i class="fas fa-shopping-cart cart-counter" id="cart-icon"><span>4</span></i> Cart</a>
+                        <a href="#about" class="nav-link">
+                            <i class="fas fa-shopping-cart cart-counter" id="cart-icon">
+                                {% if user.orders.first %}
+                                <span>{{ user.orders.first.cart_size }}</span>
+                                {% else %}
+                                <span>0</span>
+                                {% endif %}
+                            </i>
+                            Cart
+                        </a>
                     </li>
                     {% if user.is_authenticated %}
                     <li class="nav-item">
