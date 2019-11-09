@@ -14,10 +14,10 @@
                         <a href="{% url 'products-home' %}" class="nav-link"><i class="fas fa-home"></i> Home</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#about" class="nav-link">
+                        <a href="{% url 'cart-and-checkout' %}" class="nav-link">
                             <i class="fas fa-shopping-cart cart-counter" id="cart-icon">
-                                {% if user.orders.first %}
-                                <span>{{ user.orders.first.cart_size }}</span>
+                                {% if request.working_order %}
+                                <span>{{ request.working_order.cart_size }}</span>
                                 {% else %}
                                 <span>0</span>
                                 {% endif %}

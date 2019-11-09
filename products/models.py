@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator, MinValueValidator
+from django.urls import reverse
 
 
 class Product(models.Model):
@@ -61,6 +62,12 @@ class Order(models.Model):
     def cart_size(self):
         return sum(i.quantity for i in self.order_items.all())
 
+    def order_amount(self):
+        return sum(i.total_price() for i in self.order_items.all())
+
+    def not_sent(self):
+        return self.status == 'CREATED'
+
 
 class OrderItem(models.Model):
     order = models.ForeignKey(
@@ -72,6 +79,12 @@ class OrderItem(models.Model):
     quantity = models.IntegerField(
         default=10, validators=[MinValueValidator(10)])
     remarks = models.CharField(max_length=255, null=True)
+
+    def get_absolute_url(self):
+        return reverse('cart-and-checkout', kwargs={})
+
+    def total_price(self):
+        return self.product.price * self.quantity
 
 
 class Payment(models.Model):

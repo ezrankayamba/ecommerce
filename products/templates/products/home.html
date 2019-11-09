@@ -48,7 +48,7 @@
                             $ {{ product.price|floatformat:2|intcomma }} <br />
                             <div class="btn-group pt-1" role="group">
                                 <a href="{% url 'add-to-cart' product.id %}" role="button" class="btn btn-sm btn-outline-secondary"><i class="fas fa-cart-plus"></i> Cart</a>
-                                <a href="{% url 'add-and-buy-now' product.id %}" role="button" class="btn btn-sm btn-secondary text-primary">Buy Now</a>
+                                <a href="{% url 'add-and-buy-now' product.id %}" role="button" class="btn btn-sm btn-secondary text-light">Buy Now</a>
                             </div>
                         </div>
                     </div>
@@ -75,10 +75,10 @@
                 <p class="card-text">{{ product.description }}</p>
             </div>
             <div class="card-footer">
-                <span>$ 10.00</span>
+                <span>$ {{ product.price|floatformat:2|intcomma }}</span>
                 <div class="btn-group pl-2 float-right" role="group">
                     <a href="{% url 'add-to-cart' product.id %}" role="button" class="btn btn-sm btn-outline-secondary"><i class="fas fa-cart-plus"></i> Cart</a>
-                    <a href="{% url 'add-and-buy-now' product.id %}" role="button" class="btn btn-sm btn-secondary text-primary">Buy Now</a>
+                    <a href="{% url 'add-and-buy-now' product.id %}" role="button" class="btn btn-sm btn-secondary text-light">Buy Now</a>
                 </div>
             </div>
         </div>
@@ -96,7 +96,7 @@
 {% include 'core/main-footer.html' %}
 {% endblock %}
 {% block extra_js %}
-<script src="{% static 'core/reactjs/react.production.min.js' %}"></script>
-<script src="{% static 'core/reactjs/react-dom.production.min.js' %}"></script>
+<!-- <script src="{% static 'core/reactjs/react.production.min.js' %}"></script> -->
+<!-- <script src="{% static 'core/reactjs/react-dom.production.min.js' %}"></script> -->
 <!-- <script type="text/javascript" src="{% static 'products/js/cart.js' %}"></script> -->
 {% endblock %}

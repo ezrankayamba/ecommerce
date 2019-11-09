@@ -5,6 +5,8 @@ from . import models
 from django.contrib.auth.mixins import LoginRequiredMixin
 from datetime import datetime
 from django.contrib import messages
+from django.views.generic.edit import UpdateView
+from . import forms
 
 
 class ProductsHomeView(ListView):
@@ -17,8 +19,6 @@ class ProductsHomeView(ListView):
         context = super().get_context_data(**kwargs)
         context['product_images'] = models.ProductImage.objects.all()
         context['top_products'] = models.Product.objects.all()[:2]
-        order = self.request.user.orders.first()
-        print('Current Cart Order: ', order)
         return context
 
 
@@ -26,7 +26,8 @@ class AddToCartView(LoginRequiredMixin, View):
     def get(self, request, product_id):
         print(models.ORDER_STATUS_CHOICES)
         user = request.user
-        order = models.Order.objects.filter(user=user).first()
+        order = models.Order.objects.filter(
+            user=user, status='CREATED').first()
 
         if order == None:
             order = models.Order.objects.create(user=user)
@@ -51,8 +52,8 @@ class AddAndBuyNowView(LoginRequiredMixin, View):
     def get(self, request, product_id):
         print(models.ORDER_STATUS_CHOICES)
         user = request.user
-        order = models.Order.objects.filter(user=user).first()
-
+        order = models.Order.objects.filter(
+            user=user, status='CREATED').first()
         if order == None:
             order = models.Order.objects.create(user=user)
         print('Cart Size: ', order.cart_size())
@@ -72,6 +73,45 @@ class AddAndBuyNowView(LoginRequiredMixin, View):
         return redirect('products-home')
 
 
-class OrderItemView(LoginRequiredMixin, DetailView):
+class CartAndCheckoutView(LoginRequiredMixin, View):
+    def get(self, request):
+        print(models.ORDER_STATUS_CHOICES)
+        user = request.user
+        order = models.Order.objects.filter(
+            user=user, status='CREATED').first()
+        if order == None or order.cart_size() < 1:
+            messages.warning(request,
+                             'Cart is empty, start shopping!')
+            return redirect('products-home')
+        context = {'order': order}
+        return render(request, 'products/cart-checkout.html', context)
+
+    def post(self, request):
+        user = request.user
+        order = models.Order.objects.filter(
+            user=user, status='CREATED').first()
+        if order == None or order.cart_size() < 1 or not order.not_sent():
+            messages.warning(request,
+                             'Cart is empty, start shopping!')
+            return redirect('products-home')
+        order.status = 'SENT'
+        order.save()
+        messages.success(request,
+                         'Successfully sent the order, proceed with payment!')
+        return redirect('products-home')
+
+
+class EditOrderItemView(UpdateView):
+    template_name = 'products/edit-order-item-form.html'
+    form_class = forms.OrderItemForm
     model = models.OrderItem
-    context_object_name = 'order_item'
+
+    def form_valid(self, form):
+        return super().form_valid(form)
+
+
+def remove_order_item(request, item_id):
+    models.OrderItem.objects.get(id=item_id).delete()
+    messages.success(request,
+                     'Successfully removed item from cart!')
+    return redirect('cart-and-checkout')
