@@ -6,16 +6,18 @@
 <link rel="stylesheet" type="text/css" href="{% static 'core/css/users.css' %}">
 {% endblock %}
 {% block content %}
-<div class="container" id="logout-form">
-    <div class="wrap">
-        <h4>Logout ...</h4>
-        <div class="row">
-            <div class="col-md-4">
-                <p>Are you sure you want to logout?</p>
-                <form action="{% url 'account_logout' %}" method="POST">
-                    {% csrf_token %}
-                    <button class="btn btn-outline-secondary">Yes, Logout</button>
-                </form>
+<div class="container pt-3" id="logout-form">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h4>Logout ...</h4>
+            <div class="row">
+                <div class="col-md-4">
+                    <p>Are you sure you want to logout?</p>
+                    <form action="{% url 'account_logout' %}" method="POST">
+                        {% csrf_token %}
+                        <button class="btn btn-outline-secondary">Yes, Logout</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

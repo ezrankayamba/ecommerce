@@ -22,9 +22,13 @@
     width: 96px;
     margin-right: 20px;
     margin-bottom: 16px;
-    border: 1px solid #333;
+    border: 1px solid #eee;
 }
 
 .account-heading {
     font-size: 2.5rem;
+}
+
+#div_id_image>div>label.custom-file-label {
+    top: 1.5rem;
 }

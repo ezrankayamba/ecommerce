@@ -5,20 +5,22 @@
 <link rel="stylesheet" type="text/css" href="{% static 'core/css/users.css' %}">
 {% endblock %}
 {% block content %}
-<div class="content-section" id="register-form">
-    <div class="wrap">
-        <form method="POST">
-            {% csrf_token %}
-            <fieldset class="form-group">
-                <legend class="borde-botton mb-4">Register Account</legend>
-                {{ form|crispy }}
-            </fieldset>
-            <div class="form-group">
-                <button class="btn btn-outline-info" type="submmit">Sign Up</button>
+<div class="container pt-3">
+    <div class="row" id="register-form">
+        <div class="col-md-6 offset-md-3">
+            <form method="POST">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    <legend class="borde-botton mb-4">Register Account</legend>
+                    {{ form|crispy }}
+                </fieldset>
+                <div class="form-group">
+                    <button class="btn btn-outline-info" type="submmit">Sign Up</button>
+                </div>
+            </form>
+            <div class="border-top pt-2 pb-4">
+                <small class="text-muted">Already have an account? <a href="{% url 'users-login' %}" class="ml-2">Sign In</a></small>
             </div>
-        </form>
-        <div class="border-top pt-2 pb-4">
-            <small class="text-muted">Already have an account? <a href="{% url 'users-login' %}" class="ml-2">Sign In</a></small>
         </div>
     </div>
 </div>

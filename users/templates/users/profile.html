@@ -5,30 +5,32 @@
 <link rel="stylesheet" type="text/css" href="{% static 'core/css/users.css' %}">
 {% endblock %}
 {% block content %}
-<div class="content-section" id="profile-form">
-    <div class="wrap">
-        <div class="media">
-            <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
-            <div class="media-body">
-                <h2 class="account-heading">{{ user.username }}</h2>
-                {% if user.email %}
-                <p class="text-secondary">{{ user.email }} </p>
-                {% else %}
-                <p class="text-secondary">No email set</p>
-                {% endif %}
+<div class="container bg-light pt-3">
+    <div class="row" id="profile-form">
+        <div class="col-md-6 offset-md-3">
+            <div class="media">
+                <img class="rounded account-img" src="{{ user.profile.image.url }}">
+                <div class="media-body">
+                    <h2 class="account-heading">{{ user.username }}</h2>
+                    {% if user.email %}
+                    <p class="text-secondary">{{ user.email }} </p>
+                    {% else %}
+                    <p class="text-secondary">No email set</p>
+                    {% endif %}
+                </div>
             </div>
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    <legend class="borde-botton mb-2">Profile Info</legend>
+                    {{ u_form|crispy }}
+                    {{ p_form|crispy }}
+                </fieldset>
+                <div class="form-group">
+                    <button class="btn btn-outline-info" type="submmit">Update</button>
+                </div>
+            </form>
         </div>
-        <form method="POST" enctype="multipart/form-data">
-            {% csrf_token %}
-            <fieldset class="form-group">
-                <legend class="borde-botton mb-2">Profile Info</legend>
-                {{ u_form|crispy }}
-                {{ p_form|crispy }}
-            </fieldset>
-            <div class="form-group">
-                <button class="btn btn-outline-info" type="submmit">Update</button>
-            </div>
-        </form>
     </div>
 </div>
 {% endblock content%}

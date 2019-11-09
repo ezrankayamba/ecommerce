@@ -40,23 +40,65 @@ class ProductCart extends React.Component {
         super(props);
         this.state = { id: props.id, cart: 0 };
     }
-
+    // <div class="btn-group" role="group" aria-label="BuyOrCart">
+    //                             <a role="button" href="#" class="btn btn-sm btn-outline-secondary"><i class="fas fa-cart-plus"></i> Cart</a>
+    //                             <a role="button" href="#" class="btn btn-sm btn-secondary">Buy Now</a>
+    //                         </div>
     render() {
-        return e(
-            'a', {
-                onClick: () => {
-                    let count = this.state.cart + 1
-                    console.log('Cart: ', this.state.id, ' - ', count)
-                    this.setState({ cart: count })
-                    mainCart.addToCart({ id: this.state.id, count: count })
-                },
-                className: 'btn pt-0 pb-0',
-                role: 'button'
+        let rnd = e(
+            'div', {
+                className: 'btn-group',
+                role: 'group'
             },
-            e('i', {
-                className: 'fas fa-cart-plus'
-            })
-        );
+            [
+                e(
+                    'a', {
+                        onClick: () => {
+                            let count = this.state.cart + 1
+                            console.log('Cart: ', this.state.id, ' - ', count)
+                            this.setState({ cart: count })
+                            mainCart.addToCart({ id: this.state.id, count: count })
+                        },
+                        role: 'button',
+                        className: 'btn btn-sm btn-outline-secondary'
+                    }, [
+                        e('i', {
+                            className: 'fas fa-cart-plus'
+                        }),
+                        ' Cart'
+                    ]
+                ),
+                e(
+                    'a', {
+                        onClick: () => {
+                            let count = this.state.cart + 1;
+                            console.log('Cart: ', this.state.id, ' - ', count);
+                            this.setState({ cart: count });
+                            mainCart.addToCart({ id: this.state.id, count: count });
+                            console.log('Buy Now');
+                        },
+                        role: 'button',
+                        className: 'btn btn-sm btn-secondary text-primary'
+                    }, 'Buy Now'
+                )
+            ]
+        )
+        // return e(
+        //     'a', {
+        //         onClick: () => {
+        //             let count = this.state.cart + 1
+        //             console.log('Cart: ', this.state.id, ' - ', count)
+        //             this.setState({ cart: count })
+        //             mainCart.addToCart({ id: this.state.id, count: count })
+        //         },
+        //         className: 'btn pt-0 pb-0',
+        //         role: 'button'
+        //     },
+        //     e('i', {
+        //         className: 'fas fa-cart-plus'
+        //     })
+        // );
+        return rnd;
     }
 }
 
