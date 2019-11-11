@@ -1,0 +1,62 @@
+{% extends 'core/base.html' %}
+{% load humanize %}
+{% load static %}
+{% block content %}
+<div class="container small bg-light pt-3 pb-3">
+    <h5>My Orders</h5>
+    {% for order in orders %}
+    <div class="row mb-2">
+        <div class="col container">
+            <div class="card mb-2">
+                <div class="card-header">
+                    <p class="m-0">{{ order }}</p>
+                    <p class="m-0" style="font-size: 80%;">
+                        <span class="text-secondary">{{ order.record_date|date:"M d, Y H:i"}}</span>
+                    </p>
+                </div>
+                <div class="card-body pb-0">
+                    {% for order_item in order.order_items.all %}
+                    <div class="row border-bottom p-2">
+                        <div class="col-md-4">
+                            {% if order_item.product.images.first %}
+                            <img class="card-img-top" src="{{ order_item.product.images.first.image.url }}" />
+                            {% else %}
+                            <img class="card-img-top" src="{% static 'core/img/product-image-placeholder.png' %}" />
+                            {% endif %}
+                        </div>
+                        <div class="col-md-8">
+                            <h5>{{ order_item.product.title }}</h5>
+                            <p>{{ order_item.product.description }}</p>
+                            <p>
+                                <span>@ $ {{ order_item.product.price }}</span>
+                                <span class="bg-secondary pl-1 pr-1 text-light">x{{ order_item.quantity|intcomma }}</span>
+                                <span> = <b>$ {{ order_item.total_price|floatformat:2|intcomma }}</b></span>
+                            </p>
+                            <p class="text-secondary border-white">
+                                <span class="text-dark">Remarks: </span><br/>
+                                <span class="border border-white">
+                                    {% if order_item.remarks %}
+                                    {{ order_item.remarks }}
+                                    {% else %}
+                                    No remarks
+                                    {% endif %}
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <div class="row p-2">
+                        <div class="col-md-4 offset-4">
+                            Total: <span class="pr-3"><b>$ {{ order.order_amount|floatformat:2|intcomma }}</b></span>
+                        </div>
+                        <div class="col-md-4">
+                            Paid: <span class="pr-3"><b>$ {{ order.paid_amount|floatformat:2|intcomma }}</b></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

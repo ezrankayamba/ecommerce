@@ -8,7 +8,6 @@ class WorkingOrderMiddleware:
 
     def __call__(self, request):
         user = request.user
-        print(user)
         if user and user.is_authenticated:
             order = models.Order.objects.filter(
                 user=user, status='CREATED').first()

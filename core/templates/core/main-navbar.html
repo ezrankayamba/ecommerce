@@ -14,6 +14,9 @@
                         <a href="{% url 'products-home' %}" class="nav-link"><i class="fas fa-home"></i> Home</a>
                     </li>
                     <li class="nav-item">
+                        <a href="{% url 'orders-home' %}" class="nav-link"><i class="fas fa-money-bill-wave"></i> My Orders</a>
+                    </li>
+                    <li class="nav-item">
                         <a href="{% url 'cart-and-checkout' %}" class="nav-link">
                             <i class="fas fa-shopping-cart cart-counter" id="cart-icon">
                                 {% if request.working_order %}
@@ -27,7 +30,13 @@
                     </li>
                     {% if user.is_authenticated %}
                     <li class="nav-item">
-                        <a href="{% url 'users-profile' %}" class="nav-link"><i class="fas fa-user"></i> {{ user }}</a>
+                        <a href="{% url 'users-profile' %}" class="nav-link"><i class="fas fa-user"></i>
+                            {% if user.first_name %}
+                            {{ user.first_name }} {{ user.last_name }}
+                            {% else %}
+                            {{ user.username }}
+                            {% endif %}
+                        </a>
                     </li>
                     <li class="nav-item">
                         <a href="{% url 'users-logout' %}" class="nav-link"><i class="fas fa-sign-out-alt"></i> Logout</a>

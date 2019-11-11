@@ -31,6 +31,8 @@ ALLOWED_HOSTS = ['localhost', 'shopping.nezatech.co.tz']
 # Application definition
 
 INSTALLED_APPS = [
+    'payments.apps.PaymentsConfig',
+    'orders.apps.OrdersConfig',
     'products.apps.ProductsConfig',
     'users.apps.UsersConfig',
     'core.apps.CoreConfig',
@@ -62,7 +64,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'products.middleware.WorkingOrderMiddleware'
+    'orders.middleware.WorkingOrderMiddleware'
 ]
 
 ROOT_URLCONF = 'ecommerce.urls'

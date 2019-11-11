@@ -10,21 +10,31 @@
     </div>
     {% for order_item in order.order_items.all %}
     <div class="row border-bottom p-2">
-        <div class="col-md-3">
+        <div class="col-md-4">
             {% if order_item.product.images.first %}
             <img class="card-img-top" src="{{ order_item.product.images.first.image.url }}" />
             {% else %}
             <img class="card-img-top" src="{% static 'core/img/product-image-placeholder.png' %}" />
             {% endif %}
         </div>
-        <div class="col-md-6">
+        <div class="col-md-8">
             <h5>{{ order_item.product.title }}</h5>
             <p>{{ order_item.product.description }}</p>
-            <p>$ {{ order_item.product.price }}</p>
-        </div>
-        <div class="col-md-3">
-            <p>Quantity: {{ order_item.quantity|intcomma }}</p>
-            <p>Total Price: $ {{ order_item.total_price|floatformat:2|intcomma }}</p>
+            <p>
+                <span>@ $ {{ order_item.product.price }}</span>
+                <span class="bg-secondary pl-1 pr-1 text-light">x{{ order_item.quantity|intcomma }}</span>
+                <span> = <b>$ {{ order_item.total_price|floatformat:2|intcomma }}</b></span>
+            </p>
+            <p class="text-secondary border-white">
+                <span class="text-dark">Remarks: </span><br/>
+                <span class="border border-white p-1">
+                    {% if order_item.remarks %}
+                    {{ order_item.remarks }}
+                    {% else %}
+                    No remarks, edit to add remarks to the item
+                    {% endif %}
+                </span>
+            </p>
             <div class="btn-group" role="group">
                 <a href="{% url 'remove-order-item' order_item.id %}" role="button" class="btn btn-sm btn-outline-danger"><i class="far fa-trash-alt"></i> Remove</a>
                 <a href="{% url 'edit-order-item' order_item.id  %}" role="button" class="btn btn-sm btn-outline-secondary"><i class="fas fa-edit"></i> Edit</a>
@@ -32,15 +42,15 @@
         </div>
     </div>
     {% endfor %}
-    <div class="row p-2">
-        <div class="col-md-9">
-            <h3>Total:</h3>
+    <div class="row p-2 bg-white">
+        <div class="col-md-4">
+            <h5>Total:</h5>
         </div>
-        <div class="col-md-3 ">
-            <form method="POST" class="">
+        <div class="col-md-8">
+            <form method="POST" class="text-center">
                 {% csrf_token %}
-                <span>$ {{ order.order_amount|floatformat:2|intcomma }}</span>
-                <button class="btn btn-sm btn-primary float-right">Submit Order</button>
+                <span class="pr-3"><b>$ {{ order.order_amount|floatformat:2|intcomma }}</b></span>
+                <button class="btn btn-sm btn-primary">Submit Order</button>
             </form>
         </div>
     </div>
