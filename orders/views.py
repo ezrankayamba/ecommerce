@@ -9,11 +9,18 @@ from django.views.generic.edit import UpdateView
 from . import forms
 
 
-class OrdersHomeView(ListView):
+class OrdersHomeView(LoginRequiredMixin, ListView):
     model = models.Order
     context_object_name = 'orders'
     template_name = 'orders/home.html'
     paginate_by = 6
+
+    def get_queryset(self):
+        user = self.request.user
+        if user.is_staff:
+            return models.Order.objects.filter().exclude(status='CREATED')
+        else:
+            return models.Order.objects.filter(user=user).exclude(status='CREATED')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
