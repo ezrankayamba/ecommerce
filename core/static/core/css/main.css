@@ -75,11 +75,11 @@ body {
 }
 
 #carousel-products {
-    background: #8bc5ff;
+    /*background: #8bc5ff;*/
 }
 
 #carousel-products img {
-    max-height: 360px;
+    max-height: 480px;
 }
 
 #topproducts .side-product-list .wrap {
