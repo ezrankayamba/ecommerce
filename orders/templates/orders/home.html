@@ -2,8 +2,8 @@
 {% load humanize %}
 {% load static %}
 {% block content %}
-<div class="container small bg-light pt-3 pb-3">
-    <h5>My Orders</h5>
+<div class="container small bg-light pb-3">
+    <h5>List of Orders</h5>
     {% for order in orders %}
     <div class="card mb-2">
         <div class="card-header">
@@ -31,7 +31,7 @@
                         <span> = <b>$ {{ order_item.total_price|floatformat:2|intcomma }}</b></span>
                     </p>
                     <p class="text-secondary border-white">
-                        <span class="text-dark">Remarks: </span><br/>
+                        <span class="text-dark">Remarks: </span><br />
                         <span class="border border-white">
                             {% if order_item.remarks %}
                             {{ order_item.remarks }}
