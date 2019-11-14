@@ -5,29 +5,74 @@
 <link rel="stylesheet" type="text/css" href="{% static 'core/css/messenger.css' %}" />
 {% endblock %}
 {% block content %}
-<div class="container small bg-light pb-3 h-100" style="height: 100%;">
+<div class="container small pb-3 h-100" style="height: 100%;">
     <div class="row h-100">
-        <div class="d-flex flex-column h-100 col-md-6 offset-md-3">
-            <h5>Messenger</h5>
-            <div class="row flex-grow-1 bg-white">
-                {% for msg in messages %}
-                <p>msg.content</p>
-                {% empty %}
-                <p class="text-warning">No messages yet!</p>
-                {% endfor %}
+        <div class="d-flex flex-column h-100 col-md-6 offset-md-3 bg-white">
+            <div class="row">
+                <h5>Messenger</h5>
+            </div>
+            <div class="row flex-grow-1 align-items-end msg-wrap">
+                <div class="col msg-list border">
+                    {% for msg in msg_list %}
+                    <div class="row">
+                        {% if msg.sender == user %}
+                        <div class="col pl-5">
+                            <div class="row">
+                                <div class="col">
+                                    <p class="float-right mb-0">
+                                        <span class="sender text-dark">{{ msg.sender }}</span>
+                                        <span class="date text-secondary"> ~ {{ msg.record_date|date:"M d, Y H:i" }}</span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <p class="float-right chat-me">{{ msg.content }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        {% else %}
+                        <div class="col pr-5">
+                            <div class="row">
+                                <div class="col">
+                                    <p class="float-left mb-0">
+                                        <span class="sender text-dark">{{ msg.sender }}</span>
+                                        <span class="date text-secondary"> ~ {{ msg.record_date|date:"M d, Y H:i" }}</span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col pb-2">
+                                    <p class="float-left chat-other mb-0">{{ msg.content }}</p>
+                                    {% if not msg.sender.is_staff %}
+                                    <a role="button" class="btn btn-outline-primary btn-sm border-0" href="{% url 'messenger-admin-reply' msg.sender.id %}"><i class="fas fa-reply"></i> Reply</a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% empty %}
+                    <p class="text-warning">No messages yet!</p>
+                    {% endfor %}
+                </div>
             </div>
             <div class="row">
-                <form method="POST" class="col p-0">
+                <form method="POST" class="col bg-white pl-1 pr-1">
                     {% csrf_token %}
                     <div class="input-group mb-1 bg-light">
-                        <input type="text" class="form-control border-0" placeholder="Message the vendor" aria-label="Message the vendor" aria-describedby="button-addon2">
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary btn-sm border-0" type="submit" id="button-addon2"><i class="fas fa-arrow-alt-circle-right"></i></button>
-                        </div>
+                        {{ form.content }}
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </div>
+<script type="text/javascript">
+(function() {
+    var element = document.querySelector(".msg-list");
+    element.scrollTop = element.scrollHeight;
+})()
+
+</script>
 {% endblock %}
