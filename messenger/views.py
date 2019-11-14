@@ -9,18 +9,18 @@ from django.views.generic.edit import UpdateView
 from . import forms
 
 
-class PaymentsHomeView(LoginRequiredMixin, ListView):
-    model = models.Payment
+class MessengerHomeView(LoginRequiredMixin, ListView):
+    model = models.Message
     context_object_name = 'payments'
-    template_name = 'payments/home.html'
+    template_name = 'messenger/home.html'
     paginate_by = 6
 
     def get_queryset(self):
         user = self.request.user
         if user.is_staff:
-            return models.Payment.objects.filter()
+            return models.Message.objects.filter()
         else:
-            return models.Payment.objects.filter(order__user=user)
+            return models.Message.objects.filter(sender=user)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

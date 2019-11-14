@@ -1,0 +1,33 @@
+{% extends 'core/base.html' %}
+{% load humanize %}
+{% load static %}
+{% block extra_css %}
+<link rel="stylesheet" type="text/css" href="{% static 'core/css/messenger.css' %}" />
+{% endblock %}
+{% block content %}
+<div class="container small bg-light pb-3 h-100" style="height: 100%;">
+    <div class="row h-100">
+        <div class="d-flex flex-column h-100 col-md-6 offset-md-3">
+            <h5>Messenger</h5>
+            <div class="row flex-grow-1 bg-white">
+                {% for msg in messages %}
+                <p>msg.content</p>
+                {% empty %}
+                <p class="text-warning">No messages yet!</p>
+                {% endfor %}
+            </div>
+            <div class="row">
+                <form method="POST" class="col p-0">
+                    {% csrf_token %}
+                    <div class="input-group mb-1 bg-light">
+                        <input type="text" class="form-control border-0" placeholder="Message the vendor" aria-label="Message the vendor" aria-describedby="button-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary btn-sm border-0" type="submit" id="button-addon2"><i class="fas fa-arrow-alt-circle-right"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

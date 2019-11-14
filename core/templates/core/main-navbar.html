@@ -13,6 +13,11 @@
                     <li class="nav-item">
                         <a href="{% url 'products-home' %}" class="nav-link"><i class="fas fa-home"></i> Home</a>
                     </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a href="{% url 'messenger-home' %}" class="nav-link"><i class="fas fa-comment-alt"></i> Messanger</a>
+                    </li>
+                    {% endif %}
                     <li class="nav-item">
                         <a href="{% url 'orders-home' %}" class="nav-link"><i class="fas fa-money-bill-wave"></i> Orders</a>
                     </li>

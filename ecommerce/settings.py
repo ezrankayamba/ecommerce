@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['localhost', 'shopping.nezatech.co.tz']
 # Application definition
 
 INSTALLED_APPS = [
+    'messenger.apps.MessengerConfig',
     'payments.apps.PaymentsConfig',
     'orders.apps.OrdersConfig',
     'products.apps.ProductsConfig',

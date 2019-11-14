@@ -15,21 +15,30 @@
 
     <body>
         {% include 'core/main-navbar.html' %}
-        <main id="main-content" class="pt-2">
-            {% if messages %}
-            <div class="container p-0" id="flash-messages">
-                <ul class="messages border">
-                    {% for message in messages %}
-                    <li {% if message.tags %} class="text-{{ message.tags }} p-2" {% endif %}>{{ message }}</li>
-                    {% endfor %}
-                </ul>
+        <div class="container-fluid p-0 h-100" id="main-content-area">
+            <div class="h-100 d-flex flex-column">
+                <div class="row flex-grow-1 pt-2 pb-2">
+                    <div class="col">
+                        {% if messages %}
+                        <div class="container p-0" id="flash-messages">
+                            <ul class="messages border">
+                                {% for message in messages %}
+                                <li {% if message.tags %} class="text-{{ message.tags }} p-2" {% endif %}>{{ message }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        {% endif %}
+                        {% block content%}{% endblock%}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <!-- {% block footer %}{% endblock %} -->
+                        {% include 'core/main-footer.html' %}
+                    </div>
+                </div>
             </div>
-            {% endif %}
-            {% block content %}{% endblock%}
-        </main>
-        {% block footer %}
-        <!-- {% include 'core/main-footer.html' %} -->
-        {% endblock %}
+        </div>
         <script src="{% static 'core/bs4/js/jquery-3.3.1.slim.min.js' %}"></script>
         <script src="{% static 'core/bs4/js/popper.min.js' %}"></script>
         <script src="{% static 'core/bs4/js/bootstrap.min.js' %}"></script>
