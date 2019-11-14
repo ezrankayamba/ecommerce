@@ -52,4 +52,4 @@ class MessengerAdminReplyView(LoginRequiredMixin, FormView):
         rt = self.kwargs.get('replyto')
         reply_to = User.objects.get(pk=rt)
         models.Message.objects.create(sender=user, content=data['content'], receiver=reply_to)
-        return redirect('messenger-home')
+        return redirect('messenger-admin-reply', replyto=rt)
