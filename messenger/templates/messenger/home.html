@@ -57,6 +57,16 @@
                     {% endfor %}
                 </div>
             </div>
+            {% if user.is_staff and reply_to is None %}
+            <div class="row">
+                <form method="POST" class="col bg-white pl-1 pr-1">
+                    {% csrf_token %}
+                    <div class="input-group mb-1 bg-light">
+                        <input readonly="readonly" type="text" name="content" class="form-control border-1" placeholder="You are the admin, reply specific users above" required="" id="id_content" />
+                    </div>
+                </form>
+            </div>
+            {% else %}
             <div class="row">
                 <form method="POST" class="col bg-white pl-1 pr-1">
                     {% csrf_token %}
@@ -65,6 +75,7 @@
                     </div>
                 </form>
             </div>
+            {% endif %}
         </div>
     </div>
 </div>
