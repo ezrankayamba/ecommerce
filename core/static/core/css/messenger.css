@@ -57,12 +57,11 @@
     padding-right: 17px;
     box-sizing: content-box;
     max-height: 420px;
-    height: auto;
+    height: 420px;
     overflow: auto;
     scrollbar-color: light;
     align-items: flex-end;
     display: flex;
-    /*justify-content: center;*/
     flex-direction: column;
 }
 
