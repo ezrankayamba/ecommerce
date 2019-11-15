@@ -56,10 +56,14 @@
 .msg-list {
     padding-right: 17px;
     box-sizing: content-box;
-    max-height: 360px;
-    height: 360px;
+    max-height: 500px;
+    height: auto;
     overflow: auto;
     scrollbar-color: light;
+    align-items: flex-end;
+    display: flex;
+    /*justify-content: center;*/
+    flex-direction: column;
 }
 
 .msg-list .date {
