@@ -25,7 +25,7 @@ SECRET_KEY = '*n+!0msf=q@nu2vi+3p71@imp=@=fa_9yaq6ha@8n*+=rku70u'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', 'shopping.nezatech.co.tz']
+ALLOWED_HOSTS = ['localhost', 'shopping.nezatech.co.tz', '4cd408fe.ngrok.io']
 
 
 # Application definition
