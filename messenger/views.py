@@ -20,7 +20,7 @@ class MessengerHomeView(LoginRequiredMixin, FormView):
         if user.is_staff:
             return models.Message.objects.filter()
         else:
-            return models.Message.objects.filter(sender=user)
+            return models.Message.objects.filter(Q(sender=user) | Q(receiver=user))
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

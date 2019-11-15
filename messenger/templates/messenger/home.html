@@ -5,54 +5,56 @@
 <link rel="stylesheet" type="text/css" href="{% static 'core/css/messenger.css' %}" />
 {% endblock %}
 {% block content %}
-<div class="container small pb-3 h-100" style="height: 100%;">
+<div class="container small pb-3 h-1002">
     <div class="row h-100">
-        <div class="d-flex flex-column h-1002 col-md-6 offset-md-3 bg-white">
+        <div class="d-flex flex-column h-100 col-md-6 offset-md-3 bg-white">
             <div class="row">
                 <h5>Messenger</h5>
             </div>
             <div class="row flex-grow-1 msg-wrap ">
                 <div class="col msg-list d-flex flex-column-reverse">
                     {% for msg in msg_list %}
-                    <div class="row clearfix">
-                        {% if msg.sender == user %}
-                        <div class="col pl-5 align-self-end">
-                            <div class="row">
-                                <div class="col">
-                                    <p class="float-right mb-0">
-                                        <span class="sender text-dark">{{ msg.sender }}</span>
-                                        <span class="date text-secondary"> ~ {{ msg.record_date|date:"M d, Y H:i" }}</span>
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <p class="float-right chat-me">{{ msg.content }}</p>
-                                </div>
-                            </div>
-                        </div>
-                        {% else %}
-                        <div class="col pr-5">
-                            <div class="row">
-                                <div class="col">
-                                    <p class="float-left mb-0">
-                                        <span class="sender text-dark">{{ msg.sender }}</span>
-                                        <span class="date text-secondary"> ~ {{ msg.record_date|date:"M d, Y H:i" }}</span>
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col pb-2">
-                                    <div class="row">
-                                        <p class=" float-left chat-other mb-0">{{ msg.content }}</p>
+                    <div class="container">
+                        <div class="row clearfix">
+                            {% if msg.sender == user %}
+                            <div class="col pl-5">
+                                <div class="row">
+                                    <div class="col p-0">
+                                        <p class="float-right mb-0">
+                                            <span class="sender text-dark">{{ msg.sender }}</span>
+                                            <span class="date text-secondary"> ~ {{ msg.record_date|date:"M d, Y H:i" }}</span>
+                                        </p>
                                     </div>
-                                    {% if not msg.sender.is_staff and not reply_to %}
-                                    <a role="button" class="btn btn-outline-primary btn-sm border-0 float-left" href="{% url 'messenger-admin-reply' msg.sender.id %}"><i class="fas fa-reply"></i> Reply</a>
-                                    {% endif %}
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <p class="float-right chat-me">{{ msg.content }}</p>
+                                    </div>
                                 </div>
                             </div>
+                            {% else %}
+                            <div class="col pr-5">
+                                <div class="row">
+                                    <div class="col p-0">
+                                        <p class="float-left mb-0">
+                                            <span class="sender text-dark">{{ msg.sender }}</span>
+                                            <span class="date text-secondary"> ~ {{ msg.record_date|date:"M d, Y H:i" }}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col pb-2">
+                                        <div class="row">
+                                            <p class=" float-left chat-other mb-0">{{ msg.content }}</p>
+                                        </div>
+                                        {% if not msg.sender.is_staff and not reply_to %}
+                                        <a role="button" class="btn btn-outline-primary btn-sm border-0 float-left" href="{% url 'messenger-admin-reply' msg.sender.id %}"><i class="fas fa-reply"></i> Reply</a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
                         </div>
-                        {% endif %}
                     </div>
                     {% empty %}
                     <p class="text-warning">No messages yet!</p>
@@ -64,7 +66,7 @@
                 <form method="POST" class="col bg-white pl-1 pr-1">
                     {% csrf_token %}
                     <div class="input-group mb-1 bg-light">
-                        <input readonly="readonly" type="text" name="content" class="form-control border-1" placeholder="You are the admin, reply specific users above" required="" id="id_content" />
+                        <input disabled="disabled" type="text" name="content" class="form-control border-1" placeholder="You are the admin, reply specific users above" required="" id="id_content" />
                     </div>
                 </form>
             </div>

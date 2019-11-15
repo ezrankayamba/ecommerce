@@ -56,7 +56,7 @@
 .msg-list {
     padding-right: 17px;
     box-sizing: content-box;
-    max-height: 500px;
+    max-height: 420px;
     height: auto;
     overflow: auto;
     scrollbar-color: light;

@@ -8,3 +8,6 @@ class Message(models.Model):
     record_date = models.DateTimeField(auto_now_add=True, auto_now=False)
     last_update = models.DateTimeField(auto_now_add=False, auto_now=True)
     content = models.CharField(max_length=255)
+
+    class Meta:
+        ordering = ['-record_date']
